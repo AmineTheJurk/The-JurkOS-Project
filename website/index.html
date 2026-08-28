@@ -1,0 +1,425 @@
+<!-- Copyright (c) 2026 AmineTheJurk -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JurkOS</title>
+    <style>
+        :root {
+            --bg-color: #0d0f14;
+            --sidebar-bg: #161b22;
+            --text-color: #c9d1d9;
+            --accent-color: #58a6ff;
+            --border-color: #30363d;
+            --hover-color: #21262d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar Styling */
+        nav {
+            width: 240px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+        }
+
+        .logo-area {
+            padding: 0 20px 30px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            letter-spacing: 1px;
+        }
+
+        .nav-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-left: 3px solid transparent;
+            font-size: 0.95rem;
+            color: #8b949e;
+        }
+
+        .nav-item:hover {
+            background-color: var(--hover-color);
+            color: var(--text-color);
+        }
+
+        .nav-item.active {
+            background-color: var(--hover-color);
+            color: var(--text-color);
+            border-left-color: var(--accent-color);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .content-section {
+            display: none;
+            max-width: 900px;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        h2 {
+            margin-top: 40px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            margin-top: 25px;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        pre {
+            background-color: #000;
+            padding: 20px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #7ee787;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        code {
+            background-color: var(--sidebar-bg);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-area">JurkOS</div>
+        <div class="nav-item active" id="nav-home" onclick="showSection('home')">Home</div>
+        <div class="nav-item" id="nav-how" onclick="showSection('how-it-works')">How It Works</div>
+        <div class="nav-item" id="nav-compile" onclick="showSection('how-to-compile')">How To Compile</div>
+        <div class="nav-item" id="nav-flash" onclick="showSection('how-to-flash')">How To Flash</div>
+        <div class="nav-item" id="nav-vm" onclick="showSection('vm')">VM (QEMU)</div>
+        <div class="nav-item" id="nav-problems" onclick="showSection('problems')">Problems</div>
+        <div class="nav-item" id="nav-downloads" onclick="showSection('downloads')">Downloads</div>
+    </nav>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="content-section active">
+            <h1>JurkOS</h1>
+
+            <p>
+                JurkOS is an independent, minimalist "On-the-Go" operating system targeting high-performance
+                portability and bare-metal reliability. It is designed to be a lightweight, independent
+                platform that prioritizes speed, efficiency, and a direct user-to-kernel relationship.
+            </p>
+
+            <pre>
++---------------------------------------+
+|                                       |
+|            _______________            |
+|           |_______________|           |
+|                 ||||||                |
+|                 ||||||                |
+|                 ||||||   urkos        |
+|                 ||||||                |
+|                 ||||||                |
+|          ////   ||||||                |
+|         |||||  |||||||                |
+|          ||||||||||||/                |
+|           \_________/                 |
+|                                       |
++---------------------------------------+
+            </pre>
+
+            <h2>Project Target & Roadmap</h2>
+            <p>
+                The primary target of JurkOS is to provide a unified, persistent environment that remains
+                consistent across different hardware architectures (HDD, SSD, and NVMe). Currently, the system
+                supports 32-bit and 64-bit x86 architectures. Future updates will introduce ARM support to
+                expand the ecosystem further.
+            </p>
+            <p>
+                While this is an early release and not all hardware is compatible yet, future updates
+                (1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9 Alpha) will focus on expanding hardware
+                compatibility and feature sets.
+            </p>
+            <p>
+                The goal is for JurkOS to become a fully usable OS capable of reviving old computers,
+                blending high-performance utility with the spirit of a fun, independent project ;)
+            </p>
+            <p>
+                This Alpha release serves as the foundation for a fully independent ecosystem, focusing on
+                a specialized C-based kernel shell and deterministic storage management.
+            </p>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="content-section">
+            <h1>Internal Architecture & Boot Sequence</h1>
+            <p>
+                JurkOS utilizes a unique multi-stage boot process and custom initialization logic to
+                achieve hardware-independent persistence on a standard USB flash drive.
+            </p>
+
+            <h3>1. The Deterministic Bootloader (GRUB)</h3>
+            <p>
+                JurkOS uses GRUB in Legacy BIOS mode (MBR). To avoid the "Device Name Lottery"
+                (where a drive might be <code>/dev/sda</code> on one PC but <code>/dev/nvme0n1</code>
+                on another), the build process injects a custom **Disk Signature** at offset 440 of
+                the image.
+            </p>
+            <ul>
+                <li>The hex bytes <code>\x78\x56\x34\x12</code> are written to define a fixed ID.</li>
+                <li>The Linux kernel is then instructed via GRUB to mount <code>PARTUUID=12345678-01</code>.</li>
+                <li>This ensures that no matter where the USB is plugged in, the OS always finds its root partition.</li>
+            </ul>
+
+            <h3>2. The Init Hand-off (PID 1)</h3>
+            <p>
+                The Linux kernel loads into RAM and hands control to <code>/sbin/main</code>, which
+                serves as the **init process** (the parent of all other processes). Since this binary
+                is compiled statically in C, it requires no external libraries or loaders to run.
+            </p>
+
+            <h3>3. Surgical System Setup</h3>
+            <p>
+                Before the user can interact with the system, the init process performs several
+                critical environment tasks:
+            </p>
+            <ul>
+                <li><strong>Read-Write Remount</strong>: The kernel often mounts the root as read-only. JurkOS forces a remount in Read-Write mode to enable persistence.</li>
+                <li><strong>Virtual Filesystems</strong>: <code>/proc</code>, <code>/sys</code>, and <code>/dev</code> are mounted to allow the OS to talk to the hardware.</li>
+                <li><strong>mdev Population</strong>: JurkOS triggers BusyBox's <code>mdev</code> to dynamically create all hardware device nodes in the <code>/dev</code> directory.</li>
+            </ul>
+
+            <h3>4. Dynamic Storage Expansion</h3>
+            <p>
+                A standard 512MB image would waste the rest of a 16GB USB drive. On the first boot,
+                JurkOS identifies the physical size of the host drive and calls <code>resize2fs</code>
+                to grow the <code>ext4</code> filesystem to fill the entire stick. This happens
+                silently during the initial setup phase.
+            </p>
+
+            <h3>5. Encrypted Persistence</h3>
+            <p>
+                JurkOS uses a specialized directory structure at <code>/encrypted/userlogin/</code>
+                to store user data. Credentials are "encrypted" using a Base64 system scheme, and
+                a setup marker file ensures that the OS "remembers" the primary user across
+                different hardware boots.
+            </p>
+
+            <h3>6. The JurkOS Kernel Shell</h3>
+            <p>
+                The shell is a specialized C program that wraps the BusyBox <code>ash</code> kernel.
+                It provides:
+            </p>
+            <ul>
+                <li>Custom built-ins like <code>sysinfo</code> and <code>whoami</code>.</li>
+                <li>Full support for pipes, redirects, and every BusyBox applet (ls, grep, vi, awk).</li>
+                <li>An automated directory management system that creates and navigates to the user's
+                home folder (<code>/home/[username]</code>) instantly upon login.</li>
+            </ul>
+        </section>
+
+        <!-- How To Compile Section -->
+        <section id="how-to-compile" class="content-section">
+            <h1>How to Compile</h1>
+            <p>
+                This document explains how the JurkOS build process works and provides the necessary commands to generate your own bootable image.
+            </p>
+
+            <h2>1. Install Required Tools</h2>
+            <p>Before building, ensure your WSL/Linux environment has the following tools installed:</p>
+            <pre>sudo apt update && sudo apt install -y gcc-multilib grub-pc-bin parted e2fsprogs</pre>
+
+            <h2>2. Build the Image</h2>
+            <p>Navigate to the project root and run the following command:</p>
+            <pre>gcc -static iso/sbin/main.c -o iso/sbin/main && truncate -s 512M jurkos.img && parted -s jurkos.img mklabel msdos mkpart primary ext4 1M 100% set 1 boot on && printf "\x78\x56\x34\x12" | dd of=jurkos.img bs=1 seek=440 conv=notrunc && DEVICE=$(sudo losetup -Pf --show jurkos.img) && sudo mkfs.ext4 -L JURKOS_ROOT ${DEVICE}p1 && sudo mkdir -p /mnt/jurk_tmp && sudo mount ${DEVICE}p1 /mnt/jurk_tmp && sudo cp -a iso/. /mnt/jurk_tmp/ && sudo grub-install --target=i386-pc --boot-directory=/mnt/jurk_tmp/boot $DEVICE && sudo umount /mnt/jurk_tmp && sudo losetup -d $DEVICE && echo "JurkOS 1.0 Alpha: Build Success."</pre>
+
+            <h2>3. Flash to USB</h2>
+            <p>Once the build is complete, use <strong>ImageUSB</strong> to flash the <code>jurkos.img</code> to your physical USB drive.</p>
+
+            <p>Enjoy your fork! ;)</p>
+        </section>
+
+        <!-- How To Flash Section -->
+        <section id="how-to-flash" class="content-section">
+            <h1>How to Flash</h1>
+            <p>
+                Flashing JurkOS correctly is essential to maintain the read-write persistence of the
+                operating system. Standard ISO burners (like Rufus in ISO mode) may mount the drive
+                as read-only, which will break JurkOS functionality.
+            </p>
+
+            <h2>Recommended Tool: ImageUSB</h2>
+            <p>
+                We highly recommend using <a href="https://www.osforensics.com/tools/write-usb-images.html" target="_blank">ImageUSB by PassMark Software</a>.
+                ImageUSB is great for this type of project shout out to passmark software to making this great tool of my needs.
+            </p>
+
+            <h3>Steps to Flash:</h3>
+            <ul>
+                <li>Download and run ImageUSB.</li>
+                <li>Select your target USB drive from the list.</li>
+                <li>Select the <strong>'Write image to USB drive'</strong> action.</li>
+                <li>Browse and select your compiled <code>jurkos.img</code>.</li>
+                <li>Click <strong>'Write'</strong> and wait for the process to complete.</li>
+            </ul>
+            <p>
+                Once finished, your USB will have the exact same filesystem and partition structure
+                as the image, ensuring it remains fully writeable and ready to boot.
+            </p>
+        </section>
+
+        <!-- VM Section -->
+        <section id="vm" class="content-section">
+            <h1>Running in a VM (QEMU)</h1>
+            <p>
+                You can test JurkOS in a Virtual Machine before booting on bare metal. We recommend
+                using **QEMU** for its powerful hardware emulation and serial redirection capabilities.
+            </p>
+
+            <h2>Testing with Physical USB</h2>
+            <p>
+                To boot JurkOS in QEMU using your actual flash drive (while maintaining persistence),
+                follow these steps on Windows:
+            </p>
+
+            <h3>1. Identify your USB Drive</h3>
+            <p>Open CMD as Administrator and run:</p>
+            <pre>wmic diskdrive list brief</pre>
+            <p>Look for your USB and note the <code>DeviceID</code> (e.g., <code>\\.\PhysicalDrive1</code>).</p>
+
+            <h3>2. Launch QEMU</h3>
+            <p>Run the following command (update <code>PhysicalDrive1</code> to your drive number):</p>
+            <pre>qemu-system-x86_64 -m 512 -device usb-ehci,id=usb -drive if=none,id=stick,format=raw,file=\\.\PhysicalDrive1 -device usb-storage,bus=usb.0,drive=stick -serial stdio</pre>
+
+            <h3>Key Features explained:</h3>
+            <ul>
+                <li><strong>-m 512</strong>: Allocates 512MB of RAM to the VM.</li>
+                <li><strong>-serial stdio</strong>: Bridges the JurkOS kernel console directly to your terminal. You can type and see logs in your host CMD!</li>
+                <li><strong>format=raw</strong>: Ensures QEMU treats the USB as a raw physical disk, enabling persistence.</li>
+            </ul>
+        </section>
+
+        <!-- Problems Section -->
+        <section id="problems" class="content-section">
+            <h1>Common Problems</h1>
+
+            <h3>What Do I Do I Am On Linux Not Windows!</h3>
+            <p>
+                If you are using Linux and cannot use ImageUSB, we recommend using <strong>USBImager</strong>.
+                It is a lightweight, open-source tool that performs reliable bit-for-bit flashing and
+                is available for Linux, Windows, and macOS.
+            </p>
+            <p>
+                You can find it here: <a href="https://gitlab.com/bztsrc/usbimager" target="_blank">USBImager on GitLab</a>.
+            </p>
+        </section>
+
+        <!-- Downloads Section -->
+        <section id="downloads" class="content-section">
+            <h1>Downloads</h1>
+            <p>
+                The pre-compiled binary images for JurkOS will be available here soon. Currently,
+                the only way to obtain the image is by compiling it from source using the
+                <strong>How To Compile</strong> guide.
+            </p>
+            <p>
+                Stay tuned for the 1.0 Alpha stable release download! ;)
+            </p>
+        </section>
+    </main>
+
+    <script>
+        function showSection(id) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(s => s.classList.remove('active'));
+
+            // Deactivate all nav items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(n => n.classList.remove('active'));
+
+            // Show target section
+            const target = document.getElementById(id);
+            if (target) target.classList.add('active');
+
+            // Update active state in sidebar
+            const mapping = {
+                'home': 'nav-home',
+                'how-it-works': 'nav-how',
+                'how-to-compile': 'nav-compile',
+                'how-to-flash': 'nav-flash',
+                'vm': 'nav-vm',
+                'problems': 'nav-problems',
+                'downloads': 'nav-downloads'
+            };
+
+            const activeNav = document.getElementById(mapping[id]);
+            if (activeNav) activeNav.classList.add('active');
+        }
+    </script>
+</body>
+</html>
